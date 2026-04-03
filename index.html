@@ -751,6 +751,77 @@
     footer { padding: 40px 24px 24px; }
     .footer-bottom { flex-direction: column; text-align: center; }
   }
+
+  /* ── ZONE PDF RÉSULTATS ── */
+  .pdf-banner {
+    display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+    background: linear-gradient(135deg, #f0f7ff, #e8f0fe);
+    border: 1px solid #c5d8f8;
+    border-left: 4px solid var(--navy);
+    padding: 16px 20px;
+    margin-bottom: 20px;
+  }
+  .pdf-banner-info {
+    display: flex; align-items: center; gap: 12px; flex: 1; min-width: 0;
+  }
+  .pdf-banner-icon { font-size: 2rem; flex-shrink: 0; }
+  .pdf-banner-text strong {
+    display: block;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.95rem; font-weight: 700;
+    color: var(--navy); letter-spacing: 0.03em;
+  }
+  .pdf-banner-text span {
+    font-size: 0.75rem; color: var(--gray);
+  }
+  .btn-pdf-dl {
+    background: var(--navy); color: var(--white);
+    padding: 9px 20px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.8rem; font-weight: 700;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    text-decoration: none; white-space: nowrap;
+    transition: background 0.2s, transform 0.2s;
+    display: inline-flex; align-items: center; gap: 7px;
+  }
+  .btn-pdf-dl:hover { background: #1a2660; transform: translateY(-1px); }
+  .btn-pdf-view {
+    border: 1px solid var(--navy); color: var(--navy);
+    padding: 9px 20px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.8rem; font-weight: 700;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    text-decoration: none; white-space: nowrap;
+    transition: all 0.2s;
+    display: inline-flex; align-items: center; gap: 7px;
+  }
+  .btn-pdf-view:hover { background: var(--navy); color: var(--white); transform: translateY(-1px); }
+  .pdf-iframe-wrap {
+    border: 1px solid #d0d7e8;
+    margin-bottom: 28px;
+    position: relative;
+  }
+  .pdf-iframe-wrap iframe {
+    width: 100%; height: 640px; border: none; display: block;
+  }
+  .pdf-mobile-note {
+    display: none;
+    background: #f4f6fb; padding: 20px; text-align: center;
+    font-size: 0.82rem; color: var(--gray);
+  }
+  @media (max-width: 768px) {
+    .pdf-iframe-wrap iframe { display: none; }
+    .pdf-mobile-note { display: block; }
+    .pdf-banner { flex-direction: column; align-items: flex-start; }
+  }
+  .pdf-placeholder {
+    background: #f4f6fb; border: 1px dashed #cdd3de;
+    padding: 36px; text-align: center;
+    color: var(--gray); font-size: 0.88rem;
+    margin-bottom: 24px;
+  }
+  .pdf-placeholder .placeholder-icon { font-size: 2rem; margin-bottom: 8px; }
+  .pdf-placeholder strong { display: block; color: var(--navy); margin-bottom: 4px; }
 </style>
 </head>
 <body>
@@ -1076,6 +1147,7 @@
 
   <!-- ISSF 10m -->
   <div id="tab-issf10">
+    <div id="pdf-zone-issf10"></div>
     <p style="font-size:0.8rem;color:var(--gray);margin-bottom:20px;">Départemental 10m — Perpignan · 8 et 9 novembre 2025</p>
 
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
@@ -1125,6 +1197,7 @@
 
   <!-- EDT -->
   <div id="tab-edt" style="display:none">
+    <div id="pdf-zone-edt"></div>
     <p style="font-size:0.8rem;color:var(--gray);margin-bottom:20px;">Départemental EDT — Osséja · 21 et 22 mars 2026</p>
 
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
@@ -1169,14 +1242,12 @@
 
   <!-- TAR -->
   <div id="tab-tar" style="display:none">
-    <p style="font-size:0.8rem;color:var(--gray);margin-bottom:20px;">Résultats à venir — Départemental TAR · Baixas · 17-18 avril 2026</p>
-    <div style="background:#f4f6fb;padding:40px;text-align:center;color:var(--gray);">📅 Épreuve non encore disputée</div>
+    <div id="pdf-zone-tar"></div>
   </div>
 
   <!-- MLAIC -->
   <div id="tab-mlaic" style="display:none">
-    <p style="font-size:0.8rem;color:var(--gray);margin-bottom:20px;">Résultats à venir — Départemental MLAIC · Thuir · 5-6 avril 2026</p>
-    <div style="background:#f4f6fb;padding:40px;text-align:center;color:var(--gray);">📅 Épreuve non encore disputée</div>
+    <div id="pdf-zone-mlaic"></div>
   </div>
 
 </section>
@@ -1188,85 +1259,85 @@
       <div class="club-initial">C</div>
       <h4>Tir Sportif du Conflent</h4>
       <p>Prades (66500)<br>Pdt : Alfred ROSSIGNOL</p>
-      <div class="club-members"><span class="club-num">N° 11.66.002</span><a href="mailto:alfred.rossignol@orange.fr" class="club-email">✉ alfred.rossignol@orange.fr</a></div>
+      <div class="club-members"><span class="club-num">N° 11.66.002</span><a href="/cdn-cgi/l/email-protection#650409031700014b170a16160c020b0a09250a17040b02004b0317" class="club-email">✉ <span class="__cf_email__" data-cfemail="dfbeb3b9adbabbf1adb0acacb6b8b1b0b39fb0adbeb1b8baf1b9ad">[email&#160;protected]</span></a></div>
     </div>
     <div class="club-card">
       <img src="logos/logo_cote_vermeille.png" alt="Tir Côte Vermeille" class="club-logo">
       <h4>Sté de Tir Côte Vermeille</h4>
       <p>Banyuls (66650)<br>Pdt : Michel BERTA</p>
-      <div class="club-members"><span class="club-num">N° 11.66.003</span><a href="mailto:secretariat.tircote@gmail.com" class="club-email">✉ secretariat.tircote@gmail.com</a></div>
+      <div class="club-members"><span class="club-num">N° 11.66.003</span><a href="/cdn-cgi/l/email-protection#5b283e38293e2f3a29323a2f752f322938342f3e1b3c363a323775383436" class="club-email">✉ <span class="__cf_email__" data-cfemail="3043555342554451425951441e445942535f445570575d51595c1e535f5d">[email&#160;protected]</span></a></div>
     </div>
     <div class="club-card">
       <img src="logos/logo_smt_thuir.png" alt="S.M.T. Thuir" class="club-logo">
       <h4>S.M.T. Thuir</h4>
       <p>Thuir (66300)<br>Pdt : Pierre MALAFOSSE</p>
-      <div class="club-members"><span class="club-num">N° 11.66.005</span><a href="mailto:pierre-malafosse@orange.fr" class="club-email">✉ pierre-malafosse@orange.fr</a></div>
+      <div class="club-members"><span class="club-num">N° 11.66.005</span><a href="/cdn-cgi/l/email-protection#a8d8c1cddadacd85c5c9c4c9cec7dbdbcde8c7dac9c6cfcd86ceda" class="club-email">✉ <span class="__cf_email__" data-cfemail="54243d312626317939353835323b272731143b26353a33317a3226">[email&#160;protected]</span></a></div>
     </div>
     <div class="club-card">
       <img src="logos/logo_sts_perpignan.png" alt="STS Perpignan" class="club-logo">
       <h4>STS — Sté de Tir Sportif</h4>
       <p>Perpignan (66000)<br>Pdt : Sébastien CAVALLI</p>
-      <div class="club-members"><span class="club-num">N° 11.66.052</span><a href="mailto:sts.perpi@gmail.com" class="club-email">✉ sts.perpi@gmail.com</a></div>
+      <div class="club-members"><span class="club-num">N° 11.66.052</span><a href="/cdn-cgi/l/email-protection#9ae9eee9b4eaffe8eaf3dafdf7fbf3f6b4f9f5f7" class="club-email">✉ <span class="__cf_email__" data-cfemail="c9babdbae7b9acbbb9a089aea4a8a0a5e7aaa6a4">[email&#160;protected]</span></a></div>
     </div>
     <div class="club-card">
       <img src="logos/logo_baixas.png" alt="Tir Sportif de Baixas" class="club-logo">
       <h4>Tir Sportif de Baixas</h4>
       <p>Baixas (66390)<br>Pdt : Frédéric BOY</p>
-      <div class="club-members"><span class="club-num">N° 11.66.056</span><a href="mailto:fredericboy@sfr.fr" class="club-email">✉ fredericboy@sfr.fr</a></div>
+      <div class="club-members"><span class="club-num">N° 11.66.056</span><a href="/cdn-cgi/l/email-protection#305642555455425953525f49704356421e5642" class="club-email">✉ <span class="__cf_email__" data-cfemail="ee889c8b8a8b9c878d8c8197ae9d889cc0889c">[email&#160;protected]</span></a></div>
     </div>
     <div class="club-card">
       <img src="logos/logo_osseja.png" alt="Osséja Tir Sportif" class="club-logo">
       <h4>Osséja Tir Sportif</h4>
       <p>Osséja (66430)<br>Pdt : Bernard PIROF</p>
-      <div class="club-members"><span class="club-num">N° 11.66.079</span><a href="mailto:tirsportif-osseja@laposte.net" class="club-email">✉ tirsportif-osseja@laposte.net</a></div>
+      <div class="club-members"><span class="club-num">N° 11.66.079</span><a href="/cdn-cgi/l/email-protection#8afee3f8f9fae5f8fee3eca7e5f9f9efe0ebcae6ebfae5f9feefa4e4effe" class="club-email">✉ <span class="__cf_email__" data-cfemail="83f7eaf1f0f3ecf1f7eae5aeecf0f0e6e9e2c3efe2f3ecf0f7e6adede6f7">[email&#160;protected]</span></a></div>
     </div>
     <div class="club-card">
       <img src="logos/logo_vallespirienne.png" alt="Sté Vallespirienne de Tir" class="club-logo">
       <h4>Sté Vallespirienne de Tir</h4>
       <p>Amélie-les-Bains (66110)<br>Pdt : Robert PRATS</p>
-      <div class="club-members"><span class="club-num">N° 11.66.089</span><a href="mailto:svtir66@sfr.fr" class="club-email">✉ svtir66@sfr.fr</a></div>
+      <div class="club-members"><span class="club-num">N° 11.66.089</span><a href="/cdn-cgi/l/email-protection#572421233e25616117243125793125" class="club-email">✉ <span class="__cf_email__" data-cfemail="85f6f3f1ecf7b3b3c5f6e3f7abe3f7">[email&#160;protected]</span></a></div>
     </div>
     <div class="club-card">
       <img src="logos/logo_sct_saint_cyprien.png" alt="Société Catalane de Tir" class="club-logo">
       <h4>Société Catalane de Tir</h4>
       <p>Saint-Cyprien (66750)<br>Pdt : Joseph-René GOUAULT</p>
-      <div class="club-members"><span class="club-num">N° 11.66.090</span><a href="mailto:sctir66@orange.fr" class="club-email">✉ sctir66@orange.fr</a></div>
+      <div class="club-members"><span class="club-num">N° 11.66.090</span><a href="/cdn-cgi/l/email-protection#592a3a2d302b6f6f19362b38373e3c773f2b" class="club-email">✉ <span class="__cf_email__" data-cfemail="5e2d3d2a372c68681e312c3f30393b70382c">[email&#160;protected]</span></a></div>
     </div>
     <div class="club-card">
       <div class="club-initial">H</div>
       <h4>Tir Sportif du Haut Vallespir</h4>
       <p>Le Tech (66230)<br>Pdt : Jean-Pierre CASSE</p>
-      <div class="club-members"><span class="club-num">N° 11.66.131</span><a href="mailto:jean-pierre.casse@orange.fr" class="club-email">✉ jean-pierre.casse@orange.fr</a></div>
+      <div class="club-members"><span class="club-num">N° 11.66.131</span><a href="/cdn-cgi/l/email-protection#a7cdc2c6c98ad7cec2d5d5c289c4c6d4d4c2e7c8d5c6c9c0c289c1d5" class="club-email">✉ <span class="__cf_email__" data-cfemail="1a707f7b74376a737f68687f34797b69697f5a75687b747d7f347c68">[email&#160;protected]</span></a></div>
     </div>
     <div class="club-card">
       <img src="logos/logo_tautavel.png" alt="Tir Sportif de Tautavel" class="club-logo">
       <h4>Tir Sportif de Tautavel</h4>
       <p>Tautavel (66720)<br>Pdt : Henri JAUZE</p>
-      <div class="club-members"><span class="club-num">N° 11.66.137</span><a href="mailto:henri.jauze@wanadoo.fr" class="club-email">✉ henri.jauze@wanadoo.fr</a></div>
+      <div class="club-members"><span class="club-num">N° 11.66.137</span><a href="/cdn-cgi/l/email-protection#d9b1bcb7abb0f7b3b8aca3bc99aeb8b7b8bdb6b6f7bfab" class="club-email">✉ <span class="__cf_email__" data-cfemail="d8b0bdb6aab1f6b2b9ada2bd98afb9b6b9bcb7b7f6beaa">[email&#160;protected]</span></a></div>
     </div>
     <div class="club-card">
       <div class="club-initial">L</div>
       <h4>Le Soler Tir Sportif 66</h4>
       <p>Baixas (66390)<br>Pdt : Jean-Marc CALVET</p>
-      <div class="club-members"><span class="club-num">N° 11.66.139</span><a href="mailto:66solaca@gmail.com" class="club-email">✉ 66solaca@gmail.com</a></div>
+      <div class="club-members"><span class="club-num">N° 11.66.139</span><a href="/cdn-cgi/l/email-protection#e6d0d095898a878587a6818b878f8ac885898b" class="club-email">✉ <span class="__cf_email__" data-cfemail="99afafeaf6f5f8faf8d9fef4f8f0f5b7faf6f4">[email&#160;protected]</span></a></div>
     </div>
     <div class="club-card">
       <img src="logos/logo_stmed.png" alt="Société de Tir Méditerranée" class="club-logo">
       <h4>Société de Tir Méditerranée</h4>
       <p>Baixas (66390)<br>Pdt : Ulrich DOUMERGUE</p>
-      <div class="club-members"><span class="club-num">N° 11.66.140</span><a href="mailto:soctirmed@gmail.com" class="club-email">✉ soctirmed@gmail.com</a></div>
+      <div class="club-members"><span class="club-num">N° 11.66.140</span><a href="/cdn-cgi/l/email-protection#17647874637e657a727357707a767e7b3974787a" class="club-email">✉ <span class="__cf_email__" data-cfemail="ee9d818d9a879c838b8aae89838f8782c08d8183">[email&#160;protected]</span></a></div>
     </div>
     <div class="club-card">
       <img src="logos/logo_trebuchet.png" alt="Trébuchet Shooting Club" class="club-logo">
       <h4>Trébuchet Shooting Club</h4>
       <p>Baixas (66390)<br>Pdt : Fabien SULPICE</p>
-      <div class="club-members"><span class="club-num">N° 11.66.141</span><a href="mailto:trebuchetshootingclub@gmail.com" class="club-email">✉ trebuchetshootingclub@gmail.com</a></div>
+      <div class="club-members"><span class="club-num">N° 11.66.141</span><a href="/cdn-cgi/l/email-protection#c9bdbbacabbcaaa1acbdbaa1a6a6bda0a7aeaaa5bcab89aea4a8a0a5e7aaa6a4" class="club-email">✉ <span class="__cf_email__" data-cfemail="9befe9fef9eef8f3feefe8f3f4f4eff2f5fcf8f7eef9dbfcf6faf2f7b5f8f4f6">[email&#160;protected]</span></a></div>
     </div>
     <div class="club-card">
       <img src="logos/logo_du_rocher.png" alt="Société de Tir du Rocher" class="club-logo">
       <h4>Société de Tir du Rocher</h4>
       <p>Tautavel (66720)<br>Pdt : Hugues LAVERNHE</p>
-      <div class="club-members"><span class="club-num">N° 11.66.142</span><a href="mailto:societe.tir.rocher@gmail.com" class="club-email">✉ societe.tir.rocher@gmail.com</a></div>
+      <div class="club-members"><span class="club-num">N° 11.66.142</span><a href="/cdn-cgi/l/email-protection#681b070b010d1c0d461c011a461a070b000d1a280f05090104460b0705" class="club-email">✉ <span class="__cf_email__" data-cfemail="a8dbc7cbc1cddccd86dcc1da86dac7cbc0cddae8cfc5c9c1c486cbc7c5">[email&#160;protected]</span></a></div>
     </div>
   </div>
 </section>
@@ -1291,7 +1362,7 @@
   </div>
   <p class="gallery-caption">
     Toutes nos photos sur <a href="https://www.facebook.com/profile.php?id=61583380298829" target="_blank">Facebook ↗</a> · 
-    Pour envoyer vos photos : <a href="mailto:cdtir66@yahoo.com" style="color:var(--red);">cdtir66@yahoo.com</a>
+    Pour envoyer vos photos : <a href="/cdn-cgi/l/email-protection#0d6e6979647f3b3b4d746c656262236e6260" style="color:var(--red);"><span class="__cf_email__" data-cfemail="d9babdadb0abefef99a0b8b1b6b6f7bab6b4">[email&#160;protected]</span></a>
   </p>
 </section>
 
@@ -1460,7 +1531,7 @@
   <div class="footer-top">
     <div class="footer-brand">
       <h3>Comité Départemental de Tir</h3>
-      <      <div class="dept">Pyrénées-Orientales — 66</div>
+      <div class="dept">Pyrénées-Orientales — 66</div>
       <p>Instance officielle FFTir pour le département des Pyrénées-Orientales. Promotion du tir sportif, organisation des compétitions, formation des arbitres et des tireurs.</p>
     </div>
     <div class="footer-col">
@@ -1470,48 +1541,153 @@
         <li><a href="#calendrier">Calendrier</a></li>
         <li><a href="#resultats">Résultats</a></li>
         <li><a href="#clubs">Clubs</a></li>
-        <li><a href="#comite">Comité</a></li>
         <li><a href="#galerie">Galerie</a></li>
+        <li><a href="#comite">Comité</a></li>
+        <li><a href="#liens">Liens</a></li>
       </ul>
     </div>
     <div class="footer-col">
-      <h4>Ressources</h4>
+      <h4>Disciplines</h4>
       <ul>
-        <li><a href="https://www.fftir.org/reglements" target="_blank">Règlements FFTir</a></li>
-        <li><a href="https://www.fftir.org/ou-pratiquer/" target="_blank">Prendre une licence</a></li>
-        <li><a href="https://www.fftir.org/devenir-arbitre/" target="_blank">Devenir arbitre</a></li>
-        <li><a href="https://liguelrtir-lr.github.io/comit-_tir_66/" target="_blank">Formulaires</a></li>
+        <li><a href="#resultats">ISSF 10m / 18m</a></li>
+        <li><a href="#resultats">ISSF 25m / 50m</a></li>
+        <li><a href="#resultats">EDT — Écoles de Tir</a></li>
+        <li><a href="#resultats">TAR — Tir à la Rondache</a></li>
+        <li><a href="#resultats">MLAIC — Armes Anciennes</a></li>
       </ul>
     </div>
     <div class="footer-col">
-      <h4>Contact</h4>
+      <h4>Liens utiles</h4>
       <ul>
-        <li><a href="mailto:cdtir66@yahoo.com" style="color:rgba(255,255,255,0.7);">cdtir66@yahoo.com</a></li>
-        <li>Maison des Sports de Perpignan</li>
-        <li>Rue Duguay-Trouin</li>
-        <li>66000 Perpignan</li>
+        <li><a href="https://www.fftir.org/" target="_blank">FFTir nationale</a></li>
+        <li><a href="https://ligue-de-tir-languedoc-roussillon.com/" target="_blank">Ligue LR Tir</a></li>
+        <li><a href="https://www.issf-sports.org" target="_blank">ISSF internationale</a></li>
+        <li><a href="https://www.facebook.com/profile.php?id=61583380298829" target="_blank">Page Facebook</a></li>
       </ul>
     </div>
   </div>
   <div class="footer-bottom">
-    <p>© 2025–2026 Comité Départemental de Tir des <span>Pyrénées-Orientales</span> · Affilié FFTir</p>
-    <p>Site réalisé par <span>WEBJUWS66</span> · Hébergé sur GitHub Pages</p>
+    <p>© 2025–2026 Comité Départemental de Tir des <span>Pyrénées-Orientales</span> · Instance officielle FFTir</p>
+    <p>Réalisé par <span>Gérard GARCIA</span></p>
   </div>
 </footer>
 
 <button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-  window.addEventListener('scroll', () => {
-    document.getElementById('backTop').classList.toggle('visible', window.scrollY > 400);
-  });
+<script>
+/* ═══════════════════════════════════════════════════════════════════
+   CONFIGURATION RÉSULTATS — MISE À JOUR APRÈS CHAQUE COMPÉTITION
+   ═══════════════════════════════════════════════════════════════════
+   Pour ajouter un PDF :
+   1. Uploader le fichier dans le dossier /resultats/ du repo GitHub
+   2. Remplacer null par l'URL complète ci-dessous
+   3. Enregistrer et pousser sur GitHub
+   ═══════════════════════════════════════════════════════════════════ */
+const RESULTATS_CONFIG = {
+  issf10: {
+    label: "Dép. 10m / 18m — 8-9 nov. 2025",
+    date:  "8 et 9 novembre 2025",
+    lieu:  "Perpignan",
+    pdf:   null
+    // pdf: "resultats/dep_issf10_nov2025.pdf"
+  },
+  edt: {
+    label: "Dép. EDT — 21-22 mars 2026",
+    date:  "21 et 22 mars 2026",
+    lieu:  "Osséja",
+    pdf:   null
+    // pdf: "resultats/dep_edt_mars2026.pdf"
+  },
+  tar: {
+    label: "Dép. TAR — 17-18 avr. 2026",
+    date:  "17 et 18 avril 2026",
+    lieu:  "Baixas",
+    pdf:   null
+    // pdf: "resultats/dep_tar_avr2026.pdf"
+  },
+  mlaic: {
+    label: "Dép. MLAIC — 5-6 avr. 2026",
+    date:  "5 et 6 avril 2026",
+    lieu:  "Thuir",
+    pdf:   null
+    // pdf: "resultats/dep_mlaic_avr2026.pdf"
+  }
+};
 
-  function switchTab(tab) {
-    ['issf10','edt','tar','mlaic'].forEach(function(t) {
-      var el = document.getElementById('tab-'+t);
-      if (el) el.style.display = (t === tab) ? 'block' : 'none';
+/* ═══════════════════════════════════════════════════════
+   RENDU DE LA ZONE PDF
+   ═══════════════════════════════════════════════════════ */
+function renderPdfZone(tabKey) {
+  const zone = document.getElementById('pdf-zone-' + tabKey);
+  if (!zone) return;
+  const cfg = RESULTATS_CONFIG[tabKey];
+  if (!cfg) return;
+
+  if (cfg.pdf) {
+    // PDF disponible → bannière + iframe
+    zone.innerHTML = `
+      <div class="pdf-banner">
+        <div class="pdf-banner-info">
+          <div class="pdf-banner-icon">📄</div>
+          <div class="pdf-banner-text">
+            <strong>Résultats officiels FFTir — ${cfg.label}</strong>
+            <span>${cfg.lieu} · ${cfg.date} · Classements par classe et catégorie</span>
+          </div>
+        </div>
+        <a href="${cfg.pdf}" download class="btn-pdf-dl">⬇ Télécharger</a>
+        <a href="${cfg.pdf}" target="_blank" class="btn-pdf-view">↗ Ouvrir</a>
+      </div>
+      <div class="pdf-iframe-wrap">
+        <iframe src="${cfg.pdf}#toolbar=1&navpanes=0" title="Résultats ${cfg.label}"></iframe>
+        <div class="pdf-mobile-note">
+          📱 Utilisez le bouton <strong>Ouvrir</strong> pour consulter les résultats sur mobile.
+        </div>
+      </div>`;
+  } else {
+    // Pas encore de PDF → placeholder
+    zone.innerHTML = `
+      <div class="pdf-placeholder">
+        <div class="placeholder-icon">📅</div>
+        <strong>${cfg.lieu} · ${cfg.date}</strong>
+        Les résultats seront publiés ici après la compétition,
+        une fois le PDF officiel FFTir disponible.
+      </div>`;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════
+   GESTION DES ONGLETS
+   ═══════════════════════════════════════════════════════ */
+function switchTab(tabKey) {
+  // Masquer tous les panneaux
+  document.querySelectorAll('[id^="tab-"]').forEach(el => el.style.display = 'none');
+  // Désactiver tous les boutons
+  document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+  // Afficher le panneau actif
+  const panel = document.getElementById('tab-' + tabKey);
+  if (panel) panel.style.display = 'block';
+  // Activer le bouton correspondant
+  const btn = document.querySelector(`.tab-btn[data-tab="${tabKey}"]`);
+  if (btn) btn.classList.add('active');
+  // Rendre la zone PDF
+  renderPdfZone(tabKey);
+}
+
+/* ═══════════════════════════════════════════════════════
+   INIT AU CHARGEMENT
+   ═══════════════════════════════════════════════════════ */
+document.addEventListener('DOMContentLoaded', function() {
+  // Rendre la zone PDF de l'onglet actif par défaut
+  renderPdfZone('issf10');
+
+  // Bouton retour en haut
+  const backTop = document.getElementById('backTop');
+  if (backTop) {
+    window.addEventListener('scroll', function() {
+      backTop.classList.toggle('visible', window.scrollY > 400);
     });
-    document.querySelectorAll('.tab-btn').forEach(function(btn) {
-      btn.classList.remove('active');
-      if (btn.getAttribute('data-tab') === tab) btn.classList.add('active');
-    }
+  }
+});
+</script>
+</body>
+</html>
