@@ -1,6 +1,6 @@
 ---
-title: Championnat départemental 10m — Podiums et records au tir sportif
-date: 2025-03-15
+title: Debut de la saison 2026-2027
+date: 2026-09-01T00:00:00.000+02:00
 couleur: red-bg
 ---
-Belle journée de compétition à Perpignan avec 87 tireurs engagés sur les disciplines ISSF 10m. Plusieurs records personnels battus dans les catégories jeunes.
+La nouvelle saison va redémarrer ne pas oublier on certificat médical renouvelé pour la nouvelle saison, nous vous souhaitons à toutes et tous une belle saison 2026-2027
