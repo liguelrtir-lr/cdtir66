@@ -1,7 +1,7 @@
 ---
-title: Dép. EDT — Osséja
-date: 2026-03-21
-lieu: Osséja (66430) — Osséja Tir Sportif · 21 et 22 mars
+title: Départemental 10m Saint Cyprien
+date: 2026-12-12T08:00:00.000+01:00
+lieu: 12 et 13 décembre à Saint Cyprien
 niveau: departementale
 discipline: EDT
 ---
