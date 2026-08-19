@@ -1,5 +1,6 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: liguelrtir-lr/cdtir66
   branch: main
 
 # Là où atterrissent les images / PDF que vous ajoutez depuis l'admin
