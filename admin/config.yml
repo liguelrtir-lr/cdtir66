@@ -38,11 +38,12 @@ collections:
     fields:
       - { label: "Titre", name: "title", widget: "string" }
       - { label: "Date", name: "date", widget: "datetime" }
-      - { label: "Couleur du bandeau", name: "couleur", widget: "select", options: [
+      - { label: "Couleur du bandeau (si pas de photo)", name: "couleur", widget: "select", options: [
             { label: "Rouge", value: "red-bg" },
             { label: "Bleu marine", value: "navy-bg" },
             { label: "Or", value: "gold-bg" }
           ], default: "navy-bg" }
+      - { label: "Photo (optionnel, remplace le bandeau de couleur)", name: "image", widget: "image", required: false }
       - { label: "Lien externe (optionnel)", name: "lien", widget: "string", required: false, hint: "Si l'actualité renvoie vers une page externe" }
       - { label: "Texte", name: "body", widget: "markdown" }
 

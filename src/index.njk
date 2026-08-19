@@ -65,8 +65,12 @@ layout: base.njk
   <div class="news-grid">
     {% for item in collections.actualites | reverse %}
     <div class="news-card{% if loop.index == 1 %} featured{% endif %}">
-      <div class="news-card-img {{ item.data.couleur or 'navy-bg' }}">
+      <div class="news-card-img{% if not item.data.image %} {{ item.data.couleur or 'navy-bg' }}{% endif %}">
+        {% if item.data.image %}
+        <img src="{{ item.data.image }}" alt="{{ item.data.title }}">
+        {% else %}
         <span class="icon-bg">📰</span>
+        {% endif %}
       </div>
       <div class="news-body">
         <div class="news-date">{{ item.data.date | readableDate }}</div>
