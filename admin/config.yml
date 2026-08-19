@@ -63,9 +63,7 @@ collections:
             { label: "Régionale (Ligue LR)", value: "regionale" },
             { label: "Championnat de France", value: "championnat" }
           ] }
-      - { label: "Discipline", name: "discipline", widget: "select", options: [
-            "ISSF 10m", "ISSF 25/50m", "EDT", "TAR", "MLAIC"
-          ] }
+      - { label: "Discipline", name: "discipline", widget: "string", required: false, hint: "Texte libre : ISSF 10m, EDT, TAR, MLAIC, Amical, Challenge, nouvelle discipline…" }
 
   - name: "resultats-config"
     label: "Résultats (par discipline)"
