@@ -1,7 +1,7 @@
 ---
-title: CF 10m — Besançon
-date: 2026-01-26
-lieu: Besançon (25) · 26 au 31 janvier 2026
+title: "CDF ISSF 10/18 m "
+date: 2027-02-08T08:00:00.000+01:00
+lieu: CHALON EN CHAMPAGNE du 8 au 13 février 2027
 niveau: championnat
 discipline: ISSF 10m
 ---
