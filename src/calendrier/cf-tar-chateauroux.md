@@ -1,7 +1,7 @@
 ---
-title: CF TAR — Châteauroux
-date: 2026-06-19
-lieu: Châteauroux (36) · 19 au 21 juin 2026
+title: CDF TAR — VITROLLES
+date: 2027-06-25T00:00:00.000+02:00
+lieu: 25 au 27 juin 2027 VITROLLES
 niveau: championnat
 discipline: TAR
 ---
