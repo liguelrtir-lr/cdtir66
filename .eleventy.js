@@ -9,6 +9,8 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("logo_comite_66.jpeg");
   // Images éventuellement ajoutées depuis le panneau d'administration
   eleventyConfig.addPassthroughCopy("src/images");
+  // Le panneau d'administration lui-même (sinon /admin/ renvoie une page 404)
+  eleventyConfig.addPassthroughCopy("admin");
 
   // Date lisible en français : "19 août 2026"
   eleventyConfig.addFilter("readableDate", (dateValue) => {
