@@ -98,6 +98,7 @@ layout: base.njk
       </div>
       <div class="cal-info">
         <h4>{{ item.data.title }}{% if item.date < buildDate %} <span style="font-size:0.75rem;color:#888">(passé)</span>{% endif %}</h4>
+        {% if item.data.date_fin %}<p style="font-size:0.78rem;color:var(--gray);margin-bottom:2px;">Du {{ item.data.date | readableDate }} au {{ item.data.date_fin | readableDate }}</p>{% endif %}
         <p>{{ item.data.lieu }}</p>
         {% if item.data.discipline %}<span class="cal-badge {{ item.data.discipline | disciplineBadgeClass }}">{{ item.data.discipline }}</span>{% endif %}
       </div>
@@ -117,6 +118,7 @@ layout: base.njk
       </div>
       <div class="cal-info">
         <h4>{{ item.data.title }}{% if item.date < buildDate %} <span style="font-size:0.75rem;color:#888">(passé)</span>{% endif %}</h4>
+        {% if item.data.date_fin %}<p style="font-size:0.78rem;color:var(--gray);margin-bottom:2px;">Du {{ item.data.date | readableDate }} au {{ item.data.date_fin | readableDate }}</p>{% endif %}
         <p>{{ item.data.lieu }}</p>
         {% if item.data.discipline %}<span class="cal-badge {{ item.data.discipline | disciplineBadgeClass }}">{{ item.data.discipline }}</span>{% endif %}
       </div>
@@ -136,6 +138,7 @@ layout: base.njk
       </div>
       <div class="cal-info">
         <h4>{{ item.data.title }}{% if item.date < buildDate %} <span style="font-size:0.75rem;color:#888">(passé)</span>{% endif %}</h4>
+        {% if item.data.date_fin %}<p style="font-size:0.78rem;color:var(--gray);margin-bottom:2px;">Du {{ item.data.date | readableDate }} au {{ item.data.date_fin | readableDate }}</p>{% endif %}
         <p>{{ item.data.lieu }}</p>
         {% if item.data.discipline %}<span class="cal-badge {{ item.data.discipline | disciplineBadgeClass }}">{{ item.data.discipline }}</span>{% endif %}
       </div>

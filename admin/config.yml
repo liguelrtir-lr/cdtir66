@@ -55,7 +55,8 @@ collections:
       preview: false
     fields:
       - { label: "Nom de l'épreuve", name: "title", widget: "string" }
-      - { label: "Date", name: "date", widget: "datetime" }
+      - { label: "Date (premier jour)", name: "date", widget: "datetime" }
+      - { label: "Date de fin (optionnel, si l'épreuve dure plusieurs jours)", name: "date_fin", widget: "datetime", required: false }
       - { label: "Lieu / détails", name: "lieu", widget: "string" }
       - { label: "Niveau", name: "niveau", widget: "select", options: [
             { label: "Départementale", value: "departementale" },
