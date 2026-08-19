@@ -1,6 +1,6 @@
 ---
 title: Cibles Arc-en-Ciel FFTir — Programme jeunes
-date: 2025-09-01
+date: 2026-08-19T17:53:00.000+02:00
 couleur: navy-bg
 lien: https://ciblescouleurs.fftir.org/la-boutique/
 ---
