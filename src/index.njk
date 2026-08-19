@@ -21,8 +21,8 @@ layout: base.njk
     <circle cx="200" cy="200" r="21"  stroke="rgba(255,255,255,0.9)" stroke-width="1.8" fill="none"/>
     <circle cx="200" cy="200" r="7"   stroke="rgba(255,255,255,1)"   stroke-width="2" fill="none"/>
     {% set targetRings = [
-      {"n": 1, "r": 195}, {"n": 2, "r": 172}, {"n": 3, "r": 150}, {"n": 4, "r": 127}, {"n": 5, "r": 105},
-      {"n": 6, "r": 83}, {"n": 7, "r": 62}, {"n": 8, "r": 41}, {"n": 9, "r": 21}, {"n": 10, "r": 7}
+      {"n": 2, "r": 195}, {"n": 3, "r": 172}, {"n": 4, "r": 150}, {"n": 5, "r": 127}, {"n": 6, "r": 105},
+      {"n": 7, "r": 83}, {"n": 8, "r": 62}, {"n": 9, "r": 41}, {"n": 10, "r": 21}
     ] %}
     {% for ring in targetRings %}
     <text x="200" y="{{ 200 - ring.r + 7 }}" text-anchor="middle" fill="rgba(255,255,255,{{ 0.6 + ring.n * 0.04 }})" font-size="11" font-family="monospace">{{ ring.n }}</text>
