@@ -1,0 +1,409 @@
+---
+layout: base.njk
+---
+{% set hero = collections.presentation[0].data %}
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <svg class="hero-crosshair" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="200" cy="200" r="195" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.2"/>
+    <circle cx="200" cy="200" r="172" fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="1"/>
+    <circle cx="200" cy="200" r="150" fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="1"/>
+    <circle cx="200" cy="200" r="127" fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="1"/>
+    <circle cx="200" cy="200" r="105" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1"/>
+    <circle cx="200" cy="200" r="83"  fill="none" stroke="rgba(255,255,255,0.65)" stroke-width="1.2"/>
+    <circle cx="200" cy="200" r="83" fill="rgba(0,0,0,0.65)"/>
+    <circle cx="200" cy="200" r="83"  stroke="rgba(255,255,255,0.75)" stroke-width="1.2" fill="none"/>
+    <circle cx="200" cy="200" r="62"  stroke="rgba(255,255,255,0.75)" stroke-width="1.2" fill="none"/>
+    <circle cx="200" cy="200" r="41"  stroke="rgba(255,255,255,0.85)" stroke-width="1.5" fill="none"/>
+    <circle cx="200" cy="200" r="21"  stroke="rgba(255,255,255,0.9)" stroke-width="1.8" fill="none"/>
+    <circle cx="200" cy="200" r="7"   stroke="rgba(255,255,255,1)"   stroke-width="2" fill="none"/>
+  </svg>
+  <div class="hero-content">
+    <div style="margin-bottom:28px;">
+      <div style="width:160px;height:160px;border-radius:50%;background:#87CEEB;
+                  box-shadow:0 0 0 3px rgba(212,168,67,0.5), 0 8px 32px rgba(0,0,0,0.4);
+                  overflow:hidden;position:relative;">
+        <img src="logo_cdtir66_transparent.png" alt="Logo Comité Départemental de Tir 66"
+             style="width:100%;height:100%;object-fit:cover;object-position:center center;display:block;">
+      </div>
+    </div>
+    <div class="hero-badge">{{ hero.saison }}</div>
+    <h1>Comité<em>de Tir</em></h1>
+    <div class="hero-dept">Pyrénées-Orientales · Département 66</div>
+    <p>{{ hero.intro }}</p>
+    <div class="hero-ctas">
+      <a href="#calendrier" class="btn-primary">Calendrier des épreuves</a>
+      <a href="#clubs" class="btn-outline">Trouver un club</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="hero-stat"><div class="val">{{ hero.stat_clubs }}</div><div class="lbl">Clubs affiliés</div></div>
+    <div class="hero-stat"><div class="val">{{ hero.stat_licencies }}</div><div class="lbl">Licenciés</div></div>
+    <div class="hero-stat"><div class="val">{{ hero.stat_epreuves }}</div><div class="lbl">Épreuves / an</div></div>
+    <div class="hero-stat"><div class="val">{{ hero.stat_disciplines }}</div><div class="lbl">Disciplines</div></div>
+  </div>
+</section>
+
+<!-- ACTUALITÉS -->
+<section id="actualites">
+  <div class="section-label">À la une</div>
+  <div class="section-title">Dernières <span>actualités</span></div>
+  <div class="news-grid">
+    {% for item in collections.actualites | reverse %}
+    <div class="news-card{% if loop.index == 1 %} featured{% endif %}">
+      <div class="news-card-img {{ item.data.couleur or 'navy-bg' }}">
+        <span class="icon-bg">📰</span>
+      </div>
+      <div class="news-body">
+        <div class="news-date">{{ item.data.date | readableDate }}</div>
+        <h3>{{ item.data.title }}</h3>
+        <div>{{ item.templateContent | safe }}</div>
+        {% if item.data.lien %}<a href="{{ item.data.lien }}" target="_blank" class="news-more">En savoir plus →</a>{% endif %}
+      </div>
+    </div>
+    {% else %}
+    <p>Aucune actualité pour le moment.</p>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- CALENDRIER -->
+<section id="calendrier">
+  <div class="section-label">Agenda</div>
+  <div class="section-title">Calendrier des <span style="color:var(--gold)">épreuves</span></div>
+
+  <div style="margin-bottom:12px;">
+    <span style="font-family:'Barlow Condensed',sans-serif;font-size:0.75rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--red);border-bottom:2px solid var(--red);padding-bottom:4px;">Épreuves Départementales</span>
+  </div>
+  <div class="cal-grid" style="margin-bottom:40px;">
+    {% for item in collections.calendrier %}{% if item.data.niveau == "departementale" %}
+    <div class="cal-item" style="{% if item.date < buildDate %}opacity:0.5;{% endif %}">
+      <div class="cal-date" style="background:{% if item.date < buildDate %}#888{% else %}var(--red){% endif %};">
+        <div class="day">{{ item.data.date | dayNum }}</div>
+        <div class="month">{{ item.data.date | monthAbbr }}</div>
+      </div>
+      <div class="cal-info">
+        <h4>{{ item.data.title }}{% if item.date < buildDate %} <span style="font-size:0.75rem;color:#888">(passé)</span>{% endif %}</h4>
+        <p>{{ item.data.lieu }}</p>
+        {% if item.data.discipline %}<span class="cal-badge {{ item.data.discipline | disciplineBadgeClass }}">{{ item.data.discipline }}</span>{% endif %}
+      </div>
+    </div>
+    {% endif %}{% else %}<p>Aucune épreuve départementale programmée.</p>{% endfor %}
+  </div>
+
+  <div style="margin-bottom:12px;margin-top:8px;">
+    <span style="font-family:'Barlow Condensed',sans-serif;font-size:0.75rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--navy);border-bottom:2px solid var(--navy);padding-bottom:4px;">Épreuves Régionales — Ligue LR Tir</span>
+  </div>
+  <div class="cal-grid" style="margin-bottom:40px;">
+    {% for item in collections.calendrier %}{% if item.data.niveau == "regionale" %}
+    <div class="cal-item" style="{% if item.date < buildDate %}opacity:0.5;{% endif %}">
+      <div class="cal-date" style="background:{% if item.date < buildDate %}#888{% else %}var(--navy){% endif %};">
+        <div class="day">{{ item.data.date | dayNum }}</div>
+        <div class="month">{{ item.data.date | monthAbbr }}</div>
+      </div>
+      <div class="cal-info">
+        <h4>{{ item.data.title }}{% if item.date < buildDate %} <span style="font-size:0.75rem;color:#888">(passé)</span>{% endif %}</h4>
+        <p>{{ item.data.lieu }}</p>
+        {% if item.data.discipline %}<span class="cal-badge {{ item.data.discipline | disciplineBadgeClass }}">{{ item.data.discipline }}</span>{% endif %}
+      </div>
+    </div>
+    {% endif %}{% else %}<p>Aucune épreuve régionale programmée.</p>{% endfor %}
+  </div>
+
+  <div style="margin-bottom:12px;margin-top:8px;">
+    <span style="font-family:'Barlow Condensed',sans-serif;font-size:0.75rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#b8860b;border-bottom:2px solid #b8860b;padding-bottom:4px;">🏆 Championnats de France</span>
+  </div>
+  <div class="cal-grid" style="margin-bottom:40px;">
+    {% for item in collections.calendrier %}{% if item.data.niveau == "championnat" %}
+    <div class="cal-item" style="border-left:4px solid var(--gold);{% if item.date < buildDate %}opacity:0.5;{% endif %}">
+      <div class="cal-date" style="background:{% if item.date < buildDate %}#888{% else %}#b8860b{% endif %};">
+        <div class="day">{{ item.data.date | dayNum }}</div>
+        <div class="month">{{ item.data.date | monthAbbr }}</div>
+      </div>
+      <div class="cal-info">
+        <h4>{{ item.data.title }}{% if item.date < buildDate %} <span style="font-size:0.75rem;color:#888">(passé)</span>{% endif %}</h4>
+        <p>{{ item.data.lieu }}</p>
+        {% if item.data.discipline %}<span class="cal-badge {{ item.data.discipline | disciplineBadgeClass }}">{{ item.data.discipline }}</span>{% endif %}
+      </div>
+    </div>
+    {% endif %}{% else %}<p>Aucun championnat de France programmé.</p>{% endfor %}
+  </div>
+</section>
+
+<!-- RÉSULTATS -->
+<section id="resultats">
+  <div class="section-label">Palmarès</div>
+  <div class="section-title">Résultats <span>officiels</span></div>
+  <div class="results-tabs">
+    <button class="tab-btn active" data-tab="issf10" onclick="switchTab('issf10')">{{ collections.resultatissf10[0].data.label }}</button>
+    <button class="tab-btn" data-tab="edt" onclick="switchTab('edt')">{{ collections.resultatedt[0].data.label }}</button>
+    <button class="tab-btn" data-tab="tar" onclick="switchTab('tar')">{{ collections.resultattar[0].data.label }}</button>
+    <button class="tab-btn" data-tab="mlaic" onclick="switchTab('mlaic')">{{ collections.resultatmlaic[0].data.label }}</button>
+  </div>
+
+  <div id="tab-issf10"><div id="pdf-zone-issf10"></div></div>
+  <div id="tab-edt" style="display:none"><div id="pdf-zone-edt"></div></div>
+  <div id="tab-tar" style="display:none"><div id="pdf-zone-tar"></div></div>
+  <div id="tab-mlaic" style="display:none"><div id="pdf-zone-mlaic"></div></div>
+</section>
+
+<!-- CLUBS -->
+<section id="clubs">
+  <div class="section-label">Affiliés FFTir</div>
+  <div class="section-title">Clubs du <span>département 66</span></div>
+  <div class="clubs-grid">
+    <div class="club-card">
+      <div class="club-initial">C</div>
+      <h4>Tir Sportif du Conflent</h4>
+      <p>Prades (66500)<br>Pdt : Alfred ROSSIGNOL</p>
+      <div class="club-members"><span class="club-num">N° 11.66.002</span><a href="mailto:alfred.rossignol@orange.fr" class="club-email">✉ alfred.rossignol@orange.fr</a></div>
+    </div>
+    <div class="club-card">
+      <img src="logos/logo_cote_vermeille.png" alt="Tir Côte Vermeille" class="club-logo">
+      <h4>Sté de Tir Côte Vermeille</h4>
+      <p>Banyuls (66650)<br>Pdt : Michel BERTA</p>
+      <div class="club-members"><span class="club-num">N° 11.66.003</span><a href="mailto:secretariat.tircote@gmail.com" class="club-email">✉ secretariat.tircote@gmail.com</a></div>
+    </div>
+    <div class="club-card">
+      <img src="logos/logo_smt_thuir.png" alt="S.M.T. Thuir" class="club-logo">
+      <h4>S.M.T. Thuir</h4>
+      <p>Thuir (66300)<br>Pdt : Pierre MALAFOSSE</p>
+      <div class="club-members"><span class="club-num">N° 11.66.005</span><a href="mailto:pierre-malafosse@orange.fr" class="club-email">✉ pierre-malafosse@orange.fr</a></div>
+    </div>
+    <div class="club-card">
+      <img src="logos/logo_sts_perpignan.png" alt="STS Perpignan" class="club-logo">
+      <h4>STS — Sté de Tir Sportif</h4>
+      <p>Perpignan (66000)<br>Pdt : Sébastien CAVALLI</p>
+      <div class="club-members"><span class="club-num">N° 11.66.052</span><a href="mailto:sts.perpi@gmail.com" class="club-email">✉ sts.perpi@gmail.com</a></div>
+    </div>
+    <div class="club-card">
+      <img src="logos/logo_baixas.png" alt="Tir Sportif de Baixas" class="club-logo">
+      <h4>Tir Sportif de Baixas</h4>
+      <p>Baixas (66390)<br>Pdt : Frédéric BOY</p>
+      <div class="club-members"><span class="club-num">N° 11.66.056</span><a href="mailto:fredericboy@sfr.fr" class="club-email">✉ fredericboy@sfr.fr</a></div>
+    </div>
+    <div class="club-card">
+      <img src="logos/logo_osseja.png" alt="Osséja Tir Sportif" class="club-logo">
+      <h4>Osséja Tir Sportif</h4>
+      <p>Osséja (66430)<br>Pdt : Bernard PIROF</p>
+      <div class="club-members"><span class="club-num">N° 11.66.079</span><a href="mailto:tirsportif-osseja@laposte.net" class="club-email">✉ tirsportif-osseja@laposte.net</a></div>
+    </div>
+    <div class="club-card">
+      <img src="logos/logo_vallespirienne.png" alt="Sté Vallespirienne de Tir" class="club-logo">
+      <h4>Sté Vallespirienne de Tir</h4>
+      <p>Amélie-les-Bains (66110)<br>Pdt : Robert PRATS</p>
+      <div class="club-members"><span class="club-num">N° 11.66.089</span><a href="mailto:svtir66@sfr.fr" class="club-email">✉ svtir66@sfr.fr</a></div>
+    </div>
+    <div class="club-card">
+      <img src="logos/logo_sct_saint_cyprien.png" alt="Société Catalane de Tir" class="club-logo">
+      <h4>Société Catalane de Tir</h4>
+      <p>Saint-Cyprien (66750)<br>Pdt : Joseph-René GOUAULT</p>
+      <div class="club-members"><span class="club-num">N° 11.66.090</span><a href="mailto:sctir66@orange.fr" class="club-email">✉ sctir66@orange.fr</a></div>
+    </div>
+    <div class="club-card">
+      <div class="club-initial">H</div>
+      <h4>Tir Sportif du Haut Vallespir</h4>
+      <p>Le Tech (66230)<br>Pdt : Jean-Pierre CASSE</p>
+      <div class="club-members"><span class="club-num">N° 11.66.131</span><a href="mailto:jean-pierre.casse@orange.fr" class="club-email">✉ jean-pierre.casse@orange.fr</a></div>
+    </div>
+    <div class="club-card">
+      <img src="logos/logo_tautavel.png" alt="Tir Sportif de Tautavel" class="club-logo">
+      <h4>Tir Sportif de Tautavel</h4>
+      <p>Tautavel (66720)<br>Pdt : Henri JAUZE</p>
+      <div class="club-members"><span class="club-num">N° 11.66.137</span><a href="mailto:henri.jauze@wanadoo.fr" class="club-email">✉ henri.jauze@wanadoo.fr</a></div>
+    </div>
+    <div class="club-card">
+      <div class="club-initial">L</div>
+      <h4>Le Soler Tir Sportif 66</h4>
+      <p>Baixas (66390)<br>Pdt : Jean-Marc CALVET</p>
+      <div class="club-members"><span class="club-num">N° 11.66.139</span><a href="mailto:66solaca@gmail.com" class="club-email">✉ 66solaca@gmail.com</a></div>
+    </div>
+    <div class="club-card">
+      <img src="logos/logo_stmed.png" alt="Société de Tir Méditerranée" class="club-logo">
+      <h4>Société de Tir Méditerranée</h4>
+      <p>Baixas (66390)<br>Pdt : Ulrich DOUMERGUE</p>
+      <div class="club-members"><span class="club-num">N° 11.66.140</span><a href="mailto:soctirmed@gmail.com" class="club-email">✉ soctirmed@gmail.com</a></div>
+    </div>
+    <div class="club-card">
+      <img src="logos/logo_trebuchet.png" alt="Trébuchet Shooting Club" class="club-logo">
+      <h4>Trébuchet Shooting Club</h4>
+      <p>Baixas (66390)<br>Pdt : Fabien SULPICE</p>
+      <div class="club-members"><span class="club-num">N° 11.66.141</span><a href="mailto:trebuchetshootingclub@gmail.com" class="club-email">✉ trebuchetshootingclub@gmail.com</a></div>
+    </div>
+    <div class="club-card">
+      <img src="logos/logo_du_rocher.png" alt="Société de Tir du Rocher" class="club-logo">
+      <h4>Société de Tir du Rocher</h4>
+      <p>Tautavel (66720)<br>Pdt : Hugues LAVERNHE</p>
+      <div class="club-members"><span class="club-num">N° 11.66.142</span><a href="mailto:societe.tir.rocher@gmail.com" class="club-email">✉ societe.tir.rocher@gmail.com</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- GALERIE -->
+<section id="galerie">
+  <div class="section-label">Photos</div>
+  <div class="section-title">Galerie <span style="color:var(--gold)">photos</span></div>
+  <div class="gallery-grid">
+    <div class="gallery-item span2" style="background:#1a1a2e;overflow:hidden;">
+      <img src="photos/galerie_ligne_tir.png" alt="Ligne de tir carabine 10m" style="width:100%;height:100%;object-fit:cover;opacity:0.9;">
+      <div class="overlay"><span>Ligne de tir carabine 10m</span></div>
+    </div>
+    <div class="gallery-item" style="background:#1a1a2e;overflow:hidden;">
+      <img src="photos/galerie_tir_couche.jpg" alt="Tir couché carabine 25/50m" style="width:100%;height:100%;object-fit:cover;opacity:0.9;">
+      <div class="overlay"><span>Tir couché carabine 25/50m</span></div>
+    </div>
+    <div class="gallery-item" style="background:#1a1a2e;overflow:hidden;">
+      <img src="photos/galerie_medailles.jpg" alt="Médailles S.C.T. Saint-Cyprien" style="width:100%;height:100%;object-fit:cover;opacity:0.9;">
+      <div class="overlay"><span>Médailles S.C.T. Saint-Cyprien</span></div>
+    </div>
+  </div>
+  <p class="gallery-caption">
+    Toutes nos photos sur <a href="https://www.facebook.com/profile.php?id=61583380298829" target="_blank">Facebook ↗</a> ·
+    Pour envoyer vos photos : <a href="mailto:cdtir66@yahoo.com" style="color:var(--red);">cdtir66@yahoo.com</a>
+  </p>
+</section>
+
+<!-- LIENS UTILES -->
+<section id="liens">
+  <div class="section-label">Ressources</div>
+  <div class="section-title">Liens <span>utiles</span></div>
+  <div class="liens-grid">
+    <a href="https://www.fftir.org/" target="_blank" class="lien-card">
+      <div class="lien-icon">🎯</div>
+      <h4>FFTir</h4>
+      <p>Site officiel de la Fédération Française de Tir — règlements, licences, résultats.</p>
+      <div class="lien-arrow">Accéder →</div>
+    </a>
+    <a href="https://ligue-de-tir-languedoc-roussillon.com/" target="_blank" class="lien-card">
+      <div class="lien-icon">🏹</div>
+      <h4>Ligue LR Tir</h4>
+      <p>Comité régional Languedoc-Roussillon — calendrier régional, résultats, classements.</p>
+      <div class="lien-arrow">Accéder →</div>
+    </a>
+    <a href="https://www.issf-sports.org" target="_blank" class="lien-card">
+      <div class="lien-icon">🌍</div>
+      <h4>ISSF</h4>
+      <p>Fédération internationale — règles officielles carabine, pistolet, ball-trap.</p>
+      <div class="lien-arrow">Accéder →</div>
+    </a>
+    <a href="https://liguelrtir-lr.github.io/comit-_tir_66/" target="_blank" class="lien-card">
+      <div class="lien-icon">📄</div>
+      <h4>Formulaires</h4>
+      <p>Remboursements de frais, ordres de mission, demandes de subvention.</p>
+      <div class="lien-arrow">Accéder →</div>
+    </a>
+    <a href="https://www.facebook.com/profile.php?id=61583380298829" target="_blank" class="lien-card">
+      <div class="lien-icon">📘</div>
+      <h4>Page Facebook</h4>
+      <p>Actualités, photos et annonces sur notre page Facebook officielle.</p>
+      <div class="lien-arrow">Accéder →</div>
+    </a>
+  </div>
+</section>
+
+<!-- COMITÉ ÉLU -->
+<section id="comite" style="background:#f4f6fb;">
+  <div class="section-label">Gouvernance</div>
+  <div class="section-title">Comité <span>élu</span></div>
+  <p style="color:var(--gray);font-size:0.9rem;margin-top:-24px;margin-bottom:36px;">Saison 2025–2026 · 13 membres élus</p>
+
+  <div style="font-family:'Barlow Condensed',sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--red);margin-bottom:16px;display:flex;align-items:center;gap:10px;">
+    <span style="width:24px;height:2px;background:var(--red);display:inline-block;"></span>Bureau
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;margin-bottom:40px;">
+    <div style="background:var(--white);padding:24px 20px;text-align:center;border-top:4px solid var(--red);">
+      <img src="photos/garcia_gerard.png" alt="Gérard GARCIA" style="width:72px;height:72px;border-radius:50%;object-fit:cover;object-position:center top;margin:0 auto 14px;display:block;border:3px solid var(--red);">
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:0.65rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--red);margin-bottom:6px;">Président</div>
+      <div style="font-weight:700;color:var(--navy);font-size:1rem;">Gérard GARCIA</div>
+    </div>
+    <div style="background:var(--white);padding:24px 20px;text-align:center;border-top:4px solid var(--navy);">
+      <div style="width:72px;height:72px;border-radius:50%;overflow:hidden;margin:0 auto 14px;border:3px solid var(--navy);">
+        <img src="photos/doumergue_ulrich.jpg" alt="Ulrich DOUMERGUE" style="width:100%;height:100%;object-fit:cover;object-position:center center;">
+      </div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:0.65rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--navy);margin-bottom:6px;">Vice-Président</div>
+      <div style="font-weight:700;color:var(--navy);font-size:1rem;">Ulrich DOUMERGUE</div>
+    </div>
+    <div style="background:var(--white);padding:24px 20px;text-align:center;border-top:4px solid var(--navy);">
+      <div style="width:72px;height:72px;border-radius:50%;overflow:hidden;margin:0 auto 14px;border:3px solid var(--navy);">
+        <img src="photos/vinyas_nicole.jpg" alt="Nicole Vinyas" style="width:100%;height:100%;object-fit:cover;object-position:center top;">
+      </div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:0.65rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--navy);margin-bottom:6px;">Secrétaire Générale</div>
+      <div style="font-weight:700;color:var(--navy);font-size:1rem;">Nicole VINYAS</div>
+    </div>
+    <div style="background:var(--white);padding:24px 20px;text-align:center;border-top:4px solid var(--navy);">
+      <div style="width:72px;height:72px;border-radius:50%;overflow:hidden;margin:0 auto 14px;border:3px solid var(--navy);">
+        <img src="photos/angulo_andres.jpg" alt="Andres ANGULO" style="width:100%;height:100%;object-fit:cover;object-position:center top;">
+      </div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:0.65rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--navy);margin-bottom:6px;">Secrétaire Adjoint</div>
+      <div style="font-weight:700;color:var(--navy);font-size:1rem;">Andres ANGULO</div>
+    </div>
+    <div style="background:var(--white);padding:24px 20px;text-align:center;border-top:4px solid var(--navy);">
+      <div style="width:72px;height:72px;border-radius:50%;overflow:hidden;margin:0 auto 14px;border:3px solid var(--navy);">
+        <img src="photos/guerbas_clement.jpg" alt="Clément GUERBAS" style="width:100%;height:100%;object-fit:cover;object-position:center top;">
+      </div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:0.65rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--navy);margin-bottom:6px;">Secrétaire Adjoint</div>
+      <div style="font-weight:700;color:var(--navy);font-size:1rem;">Clément GUERBAS</div>
+    </div>
+    <div style="background:var(--white);padding:24px 20px;text-align:center;border-top:4px solid var(--gold);">
+      <div style="width:72px;height:72px;border-radius:50%;overflow:hidden;margin:0 auto 14px;border:3px solid var(--gold);">
+        <img src="photos/cavalli_sebastien.jpg" alt="Sébastien CAVALLI" style="width:100%;height:100%;object-fit:cover;object-position:center top;">
+      </div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:0.65rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:#9a7320;margin-bottom:6px;">Trésorier</div>
+      <div style="font-weight:700;color:var(--navy);font-size:1rem;">Sébastien CAVALLI</div>
+    </div>
+    <div style="background:var(--white);padding:24px 20px;text-align:center;border-top:4px solid var(--navy);">
+      <div style="width:72px;height:72px;border-radius:50%;overflow:hidden;margin:0 auto 14px;border:3px solid var(--navy);">
+        <img src="photos/pescayre_daniel.png" alt="Daniel PESCAYRE" style="width:100%;height:100%;object-fit:cover;object-position:center top;">
+      </div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:0.65rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--navy);margin-bottom:6px;">RDA</div>
+      <div style="font-weight:700;color:var(--navy);font-size:1rem;">Daniel PESCAYRE</div>
+    </div>
+    <div style="background:var(--white);padding:24px 20px;text-align:center;border-top:4px solid var(--navy);">
+      <div style="width:72px;height:72px;border-radius:50%;overflow:hidden;margin:0 auto 14px;border:3px solid var(--navy);">
+        <img src="photos/vinyas_jeanluc.jpg" alt="Jean-Luc VINYAS" style="width:100%;height:100%;object-fit:cover;object-position:center top;">
+      </div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:0.65rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--navy);margin-bottom:6px;">RDA Adjoint</div>
+      <div style="font-weight:700;color:var(--navy);font-size:1rem;">Jean-Luc VINYAS</div>
+    </div>
+  </div>
+
+  <div style="font-family:'Barlow Condensed',sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--gray);margin-bottom:16px;display:flex;align-items:center;gap:10px;">
+    <span style="width:24px;height:2px;background:var(--gray);display:inline-block;"></span>Membres
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;">
+    <div style="background:var(--white);padding:20px;text-align:center;border-left:3px solid #ddd;">
+      <div style="width:60px;height:60px;border-radius:50%;overflow:hidden;margin:0 auto 12px;border:2px solid #ddd;">
+        <img src="photos/bernat_benjamin.jpg" alt="Benjamin BERNAT" style="width:100%;height:100%;object-fit:cover;object-position:center top;">
+      </div>
+      <div style="font-weight:700;color:var(--navy);font-size:0.95rem;">Benjamin BERNAT</div>
+      <div style="font-size:0.72rem;color:var(--gray);margin-top:3px;">Membre</div>
+    </div>
+    <div style="background:var(--white);padding:20px;text-align:center;border-left:3px solid #ddd;">
+      <div style="width:60px;height:60px;border-radius:50%;background:#e8ecf5;color:var(--navy);font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;">LC</div>
+      <div style="font-weight:700;color:var(--navy);font-size:0.95rem;">Lucien CAFAFA</div>
+      <div style="font-size:0.72rem;color:var(--gray);margin-top:3px;">Membre</div>
+    </div>
+    <div style="background:var(--white);padding:20px;text-align:center;border-left:3px solid #ddd;">
+      <div style="width:60px;height:60px;border-radius:50%;background:#e8ecf5;color:var(--navy);font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;">HJ</div>
+      <div style="font-weight:700;color:var(--navy);font-size:0.95rem;">Henri JAUZE</div>
+      <div style="font-size:0.72rem;color:var(--gray);margin-top:3px;">Membre</div>
+    </div>
+    <div style="background:var(--white);padding:20px;text-align:center;border-left:3px solid #ddd;">
+      <div style="width:60px;height:60px;border-radius:50%;overflow:hidden;margin:0 auto 12px;border:2px solid #ddd;">
+        <img src="photos/pezin_jean.png" alt="Jean PEZIN" style="width:100%;height:100%;object-fit:cover;object-position:center top;">
+      </div>
+      <div style="font-weight:700;color:var(--navy);font-size:0.95rem;">Jean PEZIN</div>
+      <div style="font-size:0.72rem;color:var(--gray);margin-top:3px;">Membre</div>
+    </div>
+    <div style="background:var(--white);padding:20px;text-align:center;border-left:3px solid #ddd;">
+      <div style="width:60px;height:60px;border-radius:50%;overflow:hidden;margin:0 auto 12px;border:2px solid #ddd;">
+        <img src="photos/rubin_andre.png" alt="André RUBIN" style="width:100%;height:100%;object-fit:cover;object-position:center top;">
+      </div>
+      <div style="font-weight:700;color:var(--navy);font-size:0.95rem;">André RUBIN</div>
+      <div style="font-size:0.72rem;color:var(--gray);margin-top:3px;">Membre</div>
+    </div>
+  </div>
+</section>

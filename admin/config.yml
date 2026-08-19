@@ -1,0 +1,112 @@
+backend:
+  name: git-gateway
+  branch: main
+
+# Là où atterrissent les images / PDF que vous ajoutez depuis l'admin
+media_folder: "src/images/uploads"
+public_folder: "/images/uploads"
+
+locale: "fr"
+
+collections:
+  - name: "presentation"
+    label: "Présentation (page d'accueil)"
+    editor:
+      preview: false
+    files:
+      - file: "src/presentation.md"
+        label: "Bandeau d'accueil"
+        name: "presentation"
+        fields:
+          - { label: "Saison affichée", name: "saison", widget: "string", hint: "Ex : Saison 2025 – 2026" }
+          - { label: "Phrase d'introduction", name: "intro", widget: "text" }
+          - { label: "Nombre de clubs affiliés", name: "stat_clubs", widget: "string" }
+          - { label: "Nombre de licenciés", name: "stat_licencies", widget: "string" }
+          - { label: "Nombre d'épreuves / an", name: "stat_epreuves", widget: "string" }
+          - { label: "Nombre de disciplines", name: "stat_disciplines", widget: "string" }
+          - { label: "Étiquette (ne pas modifier)", name: "tags", widget: "hidden", default: "presentation" }
+          - { label: "Lien (ne pas modifier)", name: "permalink", widget: "hidden", default: false }
+
+  - name: "actualites"
+    label: "Actualités"
+    folder: "src/actualites"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    editor:
+      preview: false
+    fields:
+      - { label: "Titre", name: "title", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime" }
+      - { label: "Couleur du bandeau", name: "couleur", widget: "select", options: [
+            { label: "Rouge", value: "red-bg" },
+            { label: "Bleu marine", value: "navy-bg" },
+            { label: "Or", value: "gold-bg" }
+          ], default: "navy-bg" }
+      - { label: "Lien externe (optionnel)", name: "lien", widget: "string", required: false, hint: "Si l'actualité renvoie vers une page externe" }
+      - { label: "Texte", name: "body", widget: "markdown" }
+
+  - name: "calendrier"
+    label: "Calendrier des compétitions"
+    folder: "src/calendrier"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    editor:
+      preview: false
+    fields:
+      - { label: "Nom de l'épreuve", name: "title", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime" }
+      - { label: "Lieu / détails", name: "lieu", widget: "string" }
+      - { label: "Niveau", name: "niveau", widget: "select", options: [
+            { label: "Départementale", value: "departementale" },
+            { label: "Régionale (Ligue LR)", value: "regionale" },
+            { label: "Championnat de France", value: "championnat" }
+          ] }
+      - { label: "Discipline", name: "discipline", widget: "select", options: [
+            "ISSF 10m", "ISSF 25/50m", "EDT", "TAR", "MLAIC"
+          ] }
+
+  - name: "resultats-config"
+    label: "Résultats (par discipline)"
+    editor:
+      preview: false
+    files:
+      - file: "src/resultats-config/issf10.md"
+        label: "ISSF 10m / 18m"
+        name: "issf10"
+        fields:
+          - { label: "Libellé de l'onglet", name: "label", widget: "string" }
+          - { label: "Date(s)", name: "date", widget: "string" }
+          - { label: "Lieu", name: "lieu", widget: "string" }
+          - { label: "Fichier PDF des résultats", name: "pdf", widget: "file", required: false }
+          - { label: "Étiquette (ne pas modifier)", name: "tags", widget: "hidden", default: "resultatissf10" }
+          - { label: "Lien (ne pas modifier)", name: "permalink", widget: "hidden", default: false }
+      - file: "src/resultats-config/edt.md"
+        label: "EDT — Écoles de Tir"
+        name: "edt"
+        fields:
+          - { label: "Libellé de l'onglet", name: "label", widget: "string" }
+          - { label: "Date(s)", name: "date", widget: "string" }
+          - { label: "Lieu", name: "lieu", widget: "string" }
+          - { label: "Fichier PDF des résultats", name: "pdf", widget: "file", required: false }
+          - { label: "Étiquette (ne pas modifier)", name: "tags", widget: "hidden", default: "resultatedt" }
+          - { label: "Lien (ne pas modifier)", name: "permalink", widget: "hidden", default: false }
+      - file: "src/resultats-config/tar.md"
+        label: "TAR — Tir à la Rondache"
+        name: "tar"
+        fields:
+          - { label: "Libellé de l'onglet", name: "label", widget: "string" }
+          - { label: "Date(s)", name: "date", widget: "string" }
+          - { label: "Lieu", name: "lieu", widget: "string" }
+          - { label: "Fichier PDF des résultats", name: "pdf", widget: "file", required: false }
+          - { label: "Étiquette (ne pas modifier)", name: "tags", widget: "hidden", default: "resultattar" }
+          - { label: "Lien (ne pas modifier)", name: "permalink", widget: "hidden", default: false }
+      - file: "src/resultats-config/mlaic.md"
+        label: "MLAIC — Armes Anciennes"
+        name: "mlaic"
+        fields:
+          - { label: "Libellé de l'onglet", name: "label", widget: "string" }
+          - { label: "Date(s)", name: "date", widget: "string" }
+          - { label: "Lieu", name: "lieu", widget: "string" }
+          - { label: "Fichier PDF des résultats", name: "pdf", widget: "file", required: false }
+          - { label: "Étiquette (ne pas modifier)", name: "tags", widget: "hidden", default: "resultatmlaic" }
+          - { label: "Lien (ne pas modifier)", name: "permalink", widget: "hidden", default: false }
