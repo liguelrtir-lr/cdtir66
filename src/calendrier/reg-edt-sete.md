@@ -1,7 +1,7 @@
 ---
 title: Régional EDT — Sète
-date: 2026-04-11
-lieu: Sète (34200) · 11 et 12 avril
+date: 2027-03-20T00:00:00.000+01:00
+lieu: Sète (34200)
 niveau: regionale
 discipline: EDT
 ---
