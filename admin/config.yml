@@ -5,7 +5,7 @@ backend:
 
 # Là où atterrissent les images / PDF que vous ajoutez depuis l'admin
 media_folder: "src/images/uploads"
-public_folder: "/images/uploads"
+public_folder: "images/uploads"
 
 locale: "fr"
 
