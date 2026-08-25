@@ -1,7 +1,7 @@
 ---
-title: Régional MLAIC — St-Florent-sur-Auzonnet
-date: 2026-05-01
-lieu: Saint-Florent-sur-Auzonnet (30) · 1 au 3 mai
+title: Régional MLAIC — La Canourgue
+date: 2027-04-24T00:00:00.000+02:00
+lieu: La Canourgue
 niveau: regionale
 discipline: MLAIC
 ---
