@@ -111,7 +111,8 @@ collections:
           - { label: "Fichier PDF des résultats", name: "pdf", widget: "file", required: false }
           - { label: "Étiquette (ne pas modifier)", name: "tags", widget: "hidden", default: "resultatmlaic" }
           - { label: "Lien (ne pas modifier)", name: "permalink", widget: "hidden", default: false }
-            - name: "galerie"
+
+  - name: "galerie"
     label: "Galerie photos"
     folder: "src/galerie"
     create: true
@@ -122,4 +123,3 @@ collections:
       - { label: "Légende", name: "title", widget: "string" }
       - { label: "Photo", name: "image", widget: "image" }
       - { label: "Lien externe (optionnel)", name: "lien", widget: "string", required: false, hint: "Vers l'album complet (Facebook, Flickr...) — rend la photo cliquable. Laissez vide pour une photo non cliquable." }
-             
