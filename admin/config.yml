@@ -2,6 +2,9 @@ backend:
   name: github
   repo: liguelrtir-lr/cdtir66
   branch: main
+  base_url: https://cdtir66-cms-auth.webjuws66.workers.dev
+  auth_endpoint: auth
+  
 
 # Là où atterrissent les images / PDF que vous ajoutez depuis l'admin
 media_folder: "src/images/uploads"
