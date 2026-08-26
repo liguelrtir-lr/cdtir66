@@ -397,18 +397,24 @@ layout: base.njk
 <section id="galerie">
   <div class="section-label">Photos</div>
   <div class="section-title">Galerie <span style="color:var(--gold)">photos</span></div>
-  <div class="gallery-grid">
-       {% for item in collections.galerie %}
-    {% if item.data.lien %}
+    <div class="gallery-grid">
+    {% for item in collections.galerie %}
+    {% set videoUrl = item.data.lien | videoEmbedUrl %}
+    {% if videoUrl %}
+    <div class="gallery-item" style="background:#1a1a2e;overflow:hidden;" onclick="openVideoLightbox('{{ videoUrl }}')">
+      <img src="{{ item.data.image }}" alt="{{ item.data.title }}" style="width:100%;height:100%;object-fit:cover;opacity:0.9;">
+      <div class="play-badge">▶</div>
+      <div class="overlay"><span>{{ item.data.title }}</span></div>
+    </div>
+    {% elif item.data.lien %}
     <a href="{{ item.data.lien }}" target="_blank" rel="noopener" class="gallery-item" style="background:#1a1a2e;overflow:hidden;text-decoration:none;">
-    {% else %}
-    <div class="gallery-item" style="background:#1a1a2e;overflow:hidden;">
-    {% endif %}
       <img src="{{ item.data.image }}" alt="{{ item.data.title }}" style="width:100%;height:100%;object-fit:cover;opacity:0.9;">
       <div class="overlay"><span>{{ item.data.title }}</span></div>
-    {% if item.data.lien %}
     </a>
     {% else %}
+    <div class="gallery-item" style="background:#1a1a2e;overflow:hidden;">
+      <img src="{{ item.data.image }}" alt="{{ item.data.title }}" style="width:100%;height:100%;object-fit:cover;opacity:0.9;">
+      <div class="overlay"><span>{{ item.data.title }}</span></div>
     </div>
     {% endif %}
     {% endfor %}
