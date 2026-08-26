@@ -47,6 +47,15 @@ module.exports = function (eleventyConfig) {
     return "badge-issf";
   });
 
+  // Détecte un lien YouTube/Vimeo dans la galerie et renvoie son URL d'intégration
+  eleventyConfig.addFilter("videoEmbedUrl", (url) => {
+    if (!url) return "";
+    const yt = url.match(/(?:youtube\.com\/(?:watch\?v=|shorts\/|embed\/)|youtu\.be\/)([A-Za-z0-9_-]{6,})/);
+    if (yt) return `https://www.youtube.com/embed/${yt[1]}`;
+    const vimeo = url.match(/vimeo\.com\/(?:video\/)?(\d+)/);
+    if (vimeo) return `https://player.vimeo.com/video/${vimeo[1]}`;
+    return "";
+  });
   // Convertit un objet JS en JSON prêt à être injecté dans une balise <script>
   eleventyConfig.addFilter("toJson", (obj) => JSON.stringify(obj));
 
