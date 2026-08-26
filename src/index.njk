@@ -155,17 +155,150 @@ layout: base.njk
 <section id="resultats">
   <div class="section-label">Palmarès</div>
   <div class="section-title">Résultats <span>officiels</span></div>
-  <div class="results-tabs">
-    <button class="tab-btn active" data-tab="issf10" onclick="switchTab('issf10')">{{ collections.resultatissf10[0].data.label }}</button>
-    <button class="tab-btn" data-tab="edt" onclick="switchTab('edt')">{{ collections.resultatedt[0].data.label }}</button>
-    <button class="tab-btn" data-tab="tar" onclick="switchTab('tar')">{{ collections.resultattar[0].data.label }}</button>
-    <button class="tab-btn" data-tab="mlaic" onclick="switchTab('mlaic')">{{ collections.resultatmlaic[0].data.label }}</button>
+
+  <div style="margin-bottom:12px;">
+    <span style="font-family:'Barlow Condensed',sans-serif;font-size:0.75rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);border-bottom:2px solid var(--gold);padding-bottom:4px;">Amicaux &amp; Challenges</span>
+  </div>
+  <div class="cal-grid" style="margin-bottom:40px;">
+    {% for item in collections.resultats | reverse %}{% if item.data.niveau == "amical" %}
+    <div class="cal-item" style="flex-direction:column;align-items:stretch;cursor:default;">
+      <div style="display:flex;gap:20px;align-items:flex-start;{% if item.data.pdf %}margin-bottom:16px;{% endif %}">
+        <div class="cal-date" style="background:var(--gold);">
+          <div class="day">{{ item.data.date | dayNum }}</div>
+          <div class="month">{{ item.data.date | monthAbbr }}</div>
+        </div>
+        <div class="cal-info">
+          <h4>{{ item.data.title }}</h4>
+          <p>{{ item.data.lieu }}</p>
+          {% if item.data.discipline %}<span class="cal-badge badge-issf">{{ item.data.discipline }}</span>{% endif %}
+        </div>
+      </div>
+      {% if item.data.pdf %}
+      <div class="pdf-banner" style="margin-bottom:0;">
+        <div class="pdf-banner-info">
+          <div class="pdf-banner-icon">📄</div>
+          <div class="pdf-banner-text">
+            <strong>Résultats officiels</strong>
+            <span>Classements par classe et catégorie</span>
+          </div>
+        </div>
+        <a href="{{ item.data.pdf }}" download class="btn-pdf-dl">⬇ Télécharger</a>
+        <a href="{{ item.data.pdf }}" target="_blank" class="btn-pdf-view">↗ Ouvrir</a>
+      </div>
+      {% else %}
+      <p style="font-size:0.78rem;color:var(--gray);font-style:italic;margin:0;">En attente des résultats officiels.</p>
+      {% endif %}
+    </div>
+    {% endif %}{% else %}<p>Aucun résultat amical/challenge publié pour le moment.</p>{% endfor %}
   </div>
 
-  <div id="tab-issf10"><div id="pdf-zone-issf10"></div></div>
-  <div id="tab-edt" style="display:none"><div id="pdf-zone-edt"></div></div>
-  <div id="tab-tar" style="display:none"><div id="pdf-zone-tar"></div></div>
-  <div id="tab-mlaic" style="display:none"><div id="pdf-zone-mlaic"></div></div>
+  <div style="margin-bottom:12px;margin-top:8px;">
+    <span style="font-family:'Barlow Condensed',sans-serif;font-size:0.75rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--red);border-bottom:2px solid var(--red);padding-bottom:4px;">Épreuves Départementales</span>
+  </div>
+  <div class="cal-grid" style="margin-bottom:40px;">
+    {% for item in collections.resultats | reverse %}{% if item.data.niveau == "departementale" %}
+    <div class="cal-item" style="flex-direction:column;align-items:stretch;cursor:default;">
+      <div style="display:flex;gap:20px;align-items:flex-start;{% if item.data.pdf %}margin-bottom:16px;{% endif %}">
+        <div class="cal-date" style="background:var(--red);">
+          <div class="day">{{ item.data.date | dayNum }}</div>
+          <div class="month">{{ item.data.date | monthAbbr }}</div>
+        </div>
+        <div class="cal-info">
+          <h4>{{ item.data.title }}</h4>
+          <p>{{ item.data.lieu }}</p>
+          {% if item.data.discipline %}<span class="cal-badge {{ item.data.discipline | disciplineBadgeClass }}">{{ item.data.discipline }}</span>{% endif %}
+        </div>
+      </div>
+      {% if item.data.pdf %}
+      <div class="pdf-banner" style="margin-bottom:0;">
+        <div class="pdf-banner-info">
+          <div class="pdf-banner-icon">📄</div>
+          <div class="pdf-banner-text">
+            <strong>Résultats officiels</strong>
+            <span>Classements par classe et catégorie</span>
+          </div>
+        </div>
+        <a href="{{ item.data.pdf }}" download class="btn-pdf-dl">⬇ Télécharger</a>
+        <a href="{{ item.data.pdf }}" target="_blank" class="btn-pdf-view">↗ Ouvrir</a>
+      </div>
+      {% else %}
+      <p style="font-size:0.78rem;color:var(--gray);font-style:italic;margin:0;">En attente des résultats officiels FFTir.</p>
+      {% endif %}
+    </div>
+    {% endif %}{% else %}<p>Aucun résultat départemental publié pour le moment.</p>{% endfor %}
+  </div>
+
+  <div style="margin-bottom:12px;margin-top:8px;">
+    <span style="font-family:'Barlow Condensed',sans-serif;font-size:0.75rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--navy);border-bottom:2px solid var(--navy);padding-bottom:4px;">Épreuves Régionales — Ligue LR Tir</span>
+  </div>
+  <div class="cal-grid" style="margin-bottom:40px;">
+    {% for item in collections.resultats | reverse %}{% if item.data.niveau == "regionale" %}
+    <div class="cal-item" style="flex-direction:column;align-items:stretch;cursor:default;">
+      <div style="display:flex;gap:20px;align-items:flex-start;{% if item.data.pdf %}margin-bottom:16px;{% endif %}">
+        <div class="cal-date" style="background:var(--navy);">
+          <div class="day">{{ item.data.date | dayNum }}</div>
+          <div class="month">{{ item.data.date | monthAbbr }}</div>
+        </div>
+        <div class="cal-info">
+          <h4>{{ item.data.title }}</h4>
+          <p>{{ item.data.lieu }}</p>
+          {% if item.data.discipline %}<span class="cal-badge {{ item.data.discipline | disciplineBadgeClass }}">{{ item.data.discipline }}</span>{% endif %}
+        </div>
+      </div>
+      {% if item.data.pdf %}
+      <div class="pdf-banner" style="margin-bottom:0;">
+        <div class="pdf-banner-info">
+          <div class="pdf-banner-icon">📄</div>
+          <div class="pdf-banner-text">
+            <strong>Résultats officiels</strong>
+            <span>Classements par classe et catégorie</span>
+          </div>
+        </div>
+        <a href="{{ item.data.pdf }}" download class="btn-pdf-dl">⬇ Télécharger</a>
+        <a href="{{ item.data.pdf }}" target="_blank" class="btn-pdf-view">↗ Ouvrir</a>
+      </div>
+      {% else %}
+      <p style="font-size:0.78rem;color:var(--gray);font-style:italic;margin:0;">En attente des résultats officiels.</p>
+      {% endif %}
+    </div>
+    {% endif %}{% else %}<p>Aucun résultat régional publié pour le moment.</p>{% endfor %}
+  </div>
+
+  <div style="margin-bottom:12px;margin-top:8px;">
+    <span style="font-family:'Barlow Condensed',sans-serif;font-size:0.75rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#b8860b;border-bottom:2px solid #b8860b;padding-bottom:4px;">🏆 Championnats de France</span>
+  </div>
+  <div class="cal-grid" style="margin-bottom:40px;">
+    {% for item in collections.resultats | reverse %}{% if item.data.niveau == "championnat" %}
+    <div class="cal-item" style="border-left:4px solid var(--gold);flex-direction:column;align-items:stretch;cursor:default;">
+      <div style="display:flex;gap:20px;align-items:flex-start;{% if item.data.pdf %}margin-bottom:16px;{% endif %}">
+        <div class="cal-date" style="background:#b8860b;">
+          <div class="day">{{ item.data.date | dayNum }}</div>
+          <div class="month">{{ item.data.date | monthAbbr }}</div>
+        </div>
+        <div class="cal-info">
+          <h4>{{ item.data.title }}</h4>
+          <p>{{ item.data.lieu }}</p>
+          {% if item.data.discipline %}<span class="cal-badge {{ item.data.discipline | disciplineBadgeClass }}">{{ item.data.discipline }}</span>{% endif %}
+        </div>
+      </div>
+      {% if item.data.pdf %}
+      <div class="pdf-banner" style="margin-bottom:0;">
+        <div class="pdf-banner-info">
+          <div class="pdf-banner-icon">📄</div>
+          <div class="pdf-banner-text">
+            <strong>Résultats officiels</strong>
+            <span>Classements par classe et catégorie</span>
+          </div>
+        </div>
+        <a href="{{ item.data.pdf }}" download class="btn-pdf-dl">⬇ Télécharger</a>
+        <a href="{{ item.data.pdf }}" target="_blank" class="btn-pdf-view">↗ Ouvrir</a>
+      </div>
+      {% else %}
+      <p style="font-size:0.78rem;color:var(--gray);font-style:italic;margin:0;">En attente des résultats officiels.</p>
+      {% endif %}
+    </div>
+    {% endif %}{% else %}<p>Aucun résultat de championnat de France publié pour le moment.</p>{% endfor %}
+  </div>
 </section>
 
 <!-- CLUBS -->
