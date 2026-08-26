@@ -4,7 +4,7 @@ backend:
   branch: main
   base_url: https://cdtir66-cms-auth.webjuws66.workers.dev
   auth_endpoint: auth
-  
+
 
 # Là où atterrissent les images / PDF que vous ajoutez depuis l'admin
 media_folder: "src/images/uploads"
@@ -69,51 +69,25 @@ collections:
           ] }
       - { label: "Discipline", name: "discipline", widget: "string", required: false, hint: "Texte libre : ISSF 10m, EDT, TAR, MLAIC, Amical, Challenge, nouvelle discipline…" }
 
-  - name: "resultats-config"
-    label: "Résultats (par discipline)"
+  - name: "resultats"
+    label: "Résultats de compétitions"
+    folder: "src/resultats"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     editor:
       preview: false
-    files:
-      - file: "src/resultats-config/issf10.md"
-        label: "ISSF 10m / 18m"
-        name: "issf10"
-        fields:
-          - { label: "Libellé de l'onglet", name: "label", widget: "string" }
-          - { label: "Date(s)", name: "periode", widget: "string" }
-          - { label: "Lieu", name: "lieu", widget: "string" }
-          - { label: "Fichier PDF des résultats", name: "pdf", widget: "file", required: false }
-          - { label: "Étiquette (ne pas modifier)", name: "tags", widget: "hidden", default: "resultatissf10" }
-          - { label: "Lien (ne pas modifier)", name: "permalink", widget: "hidden", default: false }
-      - file: "src/resultats-config/edt.md"
-        label: "EDT — Écoles de Tir"
-        name: "edt"
-        fields:
-          - { label: "Libellé de l'onglet", name: "label", widget: "string" }
-          - { label: "Date(s)", name: "periode", widget: "string" }
-          - { label: "Lieu", name: "lieu", widget: "string" }
-          - { label: "Fichier PDF des résultats", name: "pdf", widget: "file", required: false }
-          - { label: "Étiquette (ne pas modifier)", name: "tags", widget: "hidden", default: "resultatedt" }
-          - { label: "Lien (ne pas modifier)", name: "permalink", widget: "hidden", default: false }
-      - file: "src/resultats-config/tar.md"
-        label: "TAR — Tir à la Rondache"
-        name: "tar"
-        fields:
-          - { label: "Libellé de l'onglet", name: "label", widget: "string" }
-          - { label: "Date(s)", name: "periode", widget: "string" }
-          - { label: "Lieu", name: "lieu", widget: "string" }
-          - { label: "Fichier PDF des résultats", name: "pdf", widget: "file", required: false }
-          - { label: "Étiquette (ne pas modifier)", name: "tags", widget: "hidden", default: "resultattar" }
-          - { label: "Lien (ne pas modifier)", name: "permalink", widget: "hidden", default: false }
-      - file: "src/resultats-config/mlaic.md"
-        label: "MLAIC — Armes Anciennes"
-        name: "mlaic"
-        fields:
-          - { label: "Libellé de l'onglet", name: "label", widget: "string" }
-          - { label: "Date(s)", name: "periode", widget: "string" }
-          - { label: "Lieu", name: "lieu", widget: "string" }
-          - { label: "Fichier PDF des résultats", name: "pdf", widget: "file", required: false }
-          - { label: "Étiquette (ne pas modifier)", name: "tags", widget: "hidden", default: "resultatmlaic" }
-          - { label: "Lien (ne pas modifier)", name: "permalink", widget: "hidden", default: false }
+    fields:
+      - { label: "Nom de la compétition", name: "title", widget: "string", hint: "Ex : Championnat départemental 10m/18m, Amical de printemps, Challenge de Noël..." }
+      - { label: "Date de la compétition", name: "date", widget: "datetime" }
+      - { label: "Lieu", name: "lieu", widget: "string" }
+      - { label: "Niveau", name: "niveau", widget: "select", options: [
+            { label: "Amical / Challenge", value: "amical" },
+            { label: "Départementale", value: "departementale" },
+            { label: "Régionale (Ligue LR)", value: "regionale" },
+            { label: "Championnat de France", value: "championnat" }
+          ], default: "departementale" }
+      - { label: "Discipline (optionnel)", name: "discipline", widget: "string", required: false, hint: "Texte libre : ISSF 10m, ISSF 25m/50m, EDT, TAR, MLAIC, autre..." }
+      - { label: "Fichier PDF des résultats", name: "pdf", widget: "file", required: false, hint: "Laissez vide tant que les résultats officiels ne sont pas disponibles" }
 
   - name: "galerie"
     label: "Galerie photos"
