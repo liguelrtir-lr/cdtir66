@@ -884,69 +884,6 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 /* Configuration des résultats, générée automatiquement depuis le panneau d'administration */
-const RESULTATS_CONFIG = {
-  issf10: { label: {{ r_issf10.label | dump | safe }}, date: {{ r_issf10.periode | dump | safe }}, lieu: {{ r_issf10.lieu | dump | safe }}, pdf: {{ r_issf10.pdf | dump | safe }} },
-  edt:    { label: {{ r_edt.label | dump | safe }}, date: {{ r_edt.periode | dump | safe }}, lieu: {{ r_edt.lieu | dump | safe }}, pdf: {{ r_edt.pdf | dump | safe }} },
-  tar:    { label: {{ r_tar.label | dump | safe }}, date: {{ r_tar.periode | dump | safe }}, lieu: {{ r_tar.lieu | dump | safe }}, pdf: {{ r_tar.pdf | dump | safe }} },
-  mlaic:  { label: {{ r_mlaic.label | dump | safe }}, date: {{ r_mlaic.periode | dump | safe }}, lieu: {{ r_mlaic.lieu | dump | safe }}, pdf: {{ r_mlaic.pdf | dump | safe }} }
-};
-
-function renderPdfZone(tabKey) {
-  const zone = document.getElementById('pdf-zone-' + tabKey);
-  if (!zone) return;
-  const cfg = RESULTATS_CONFIG[tabKey];
-  if (!cfg) return;
-
-  if (cfg.pdf) {
-    zone.innerHTML = `
-      <div class="pdf-banner">
-        <div class="pdf-banner-info">
-          <div class="pdf-banner-icon">📄</div>
-          <div class="pdf-banner-text">
-            <strong>Résultats officiels FFTir — ${cfg.label}</strong>
-            <span>${cfg.lieu} · ${cfg.date} · Classements par classe et catégorie</span>
-          </div>
-        </div>
-        <a href="${cfg.pdf}" download class="btn-pdf-dl">⬇ Télécharger</a>
-        <a href="${cfg.pdf}" target="_blank" class="btn-pdf-view">↗ Ouvrir</a>
-      </div>
-      <div class="pdf-iframe-wrap">
-        <iframe src="${cfg.pdf}#toolbar=1&navpanes=0" title="Résultats ${cfg.label}"></iframe>
-        <div class="pdf-mobile-note">
-          📱 Utilisez le bouton <strong>Ouvrir</strong> pour consulter les résultats sur mobile.
-        </div>
-      </div>`;
-  } else {
-    zone.innerHTML = `
-      <div class="pdf-placeholder">
-        <div class="placeholder-icon">📅</div>
-        <strong>${cfg.lieu || ""} ${cfg.lieu ? "·" : ""} ${cfg.date || ""}</strong>
-        Les résultats seront publiés ici après la compétition,
-        une fois le PDF officiel FFTir disponible.
-      </div>`;
-  }
-}
-
-function switchTab(tabKey) {
-  document.querySelectorAll('[id^="tab-"]').forEach(el => el.style.display = 'none');
-  document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-  const panel = document.getElementById('tab-' + tabKey);
-  if (panel) panel.style.display = 'block';
-  const btn = document.querySelector(`.tab-btn[data-tab="${tabKey}"]`);
-  if (btn) btn.classList.add('active');
-  renderPdfZone(tabKey);
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-  renderPdfZone('issf10');
-  const backTop = document.getElementById('backTop');
-  if (backTop) {
-    window.addEventListener('scroll', function() {
-      backTop.classList.toggle('visible', window.scrollY > 400);
-    });
-  }
-});
-</script>
 
 </body>
 </html>
