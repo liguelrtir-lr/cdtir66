@@ -571,6 +571,38 @@
   }
   .gallery-caption a { color: var(--red); text-decoration: none; }
 
+  .gallery-item .play-badge {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2.2rem; color: var(--white);
+    background: rgba(8,14,40,0.25);
+    pointer-events: none;
+  }
+  .video-lightbox {
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(8,14,40,0.92);
+    z-index: 999;
+    align-items: center; justify-content: center;
+    padding: 24px;
+  }
+  .video-lightbox.active { display: flex; }
+  .video-lightbox-inner { width: 100%; max-width: 960px; position: relative; }
+  .video-lightbox-close {
+    position: absolute; top: -40px; right: 0;
+    background: none; border: none;
+    color: var(--white); font-size: 1.6rem;
+    cursor: pointer;
+  }
+  .video-lightbox-frame {
+    position: relative; width: 100%;
+    padding-bottom: 56.25%;
+    background: #000;
+  }
+  .video-lightbox-frame iframe {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%; border: none;
+  }
   /* ── LIENS UTILES ── */
   #liens { background: #f4f6fb; }
   .liens-grid {
@@ -873,7 +905,42 @@
 
 <button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
+<div class="video-lightbox" id="videoLightbox" onclick="if(event.target===this) closeVideoLightbox()">
+  <div class="video-lightbox-inner">
+    <button class="video-lightbox-close" onclick="closeVideoLightbox()">✕</button>
+    <div class="video-lightbox-frame">
+      <iframe id="videoLightboxFrame" src="" title="Vidéo" allow="autoplay; fullscreen" allowfullscreen></iframe>
+    </div>
+  </div>
+</div>
 <script>
+function openVideoLightbox(url) {
+  const lightbox = document.getElementById('videoLightbox');
+  const frame = document.getElementById('videoLightboxFrame');
+  if (!lightbox || !frame) return;
+  frame.src = url + (url.includes('?') ? '&' : '?') + 'autoplay=1';
+  lightbox.classList.add('active');
+}
+function closeVideoLightbox() {
+  const lightbox = document.getElementById('videoLightbox');
+  const frame = document.getElementById('videoLightboxFrame');
+  if (!lightbox || !frame) return;
+  lightbox.classList.remove('active');
+  frame.src = '';
+}
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeVideoLightbox();
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  const backTop = document.getElementById('backTop');
+  if (backTop) {
+    window.addEventListener('scroll', function() {
+      backTop.classList.toggle('visible', window.scrollY > 400);
+    });
+  }
+});
+</script><script>
 document.addEventListener('DOMContentLoaded', function() {
   const backTop = document.getElementById('backTop');
   if (backTop) {
