@@ -846,14 +846,13 @@
         <li><a href="#liens">Liens</a></li>
       </ul>
     </div>
-    <div class="footer-col">
-      <h4>Disciplines</h4>
+        <div class="footer-col">
+      <h4>Résultats</h4>
       <ul>
-        <li><a href="#resultats">ISSF 10m / 18m</a></li>
-        <li><a href="#resultats">ISSF 25m / 50m</a></li>
-        <li><a href="#resultats">EDT — Écoles de Tir</a></li>
-        <li><a href="#resultats">TAR — Tir à la Rondache</a></li>
-        <li><a href="#resultats">MLAIC — Armes Anciennes</a></li>
+        <li><a href="#resultats">Amicaux &amp; Challenges</a></li>
+        <li><a href="#resultats">Épreuves Départementales</a></li>
+        <li><a href="#resultats">Épreuves Régionales</a></li>
+        <li><a href="#resultats">Championnats de France</a></li>
       </ul>
     </div>
     <div class="footer-col">
@@ -874,11 +873,16 @@
 
 <button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
-{% set r_issf10 = collections.resultatissf10[0].data %}
-{% set r_edt = collections.resultatedt[0].data %}
-{% set r_tar = collections.resultattar[0].data %}
-{% set r_mlaic = collections.resultatmlaic[0].data %}
 <script>
+document.addEventListener('DOMContentLoaded', function() {
+  const backTop = document.getElementById('backTop');
+  if (backTop) {
+    window.addEventListener('scroll', function() {
+      backTop.classList.toggle('visible', window.scrollY > 400);
+    });
+  }
+});
+</script>
 /* Configuration des résultats, générée automatiquement depuis le panneau d'administration */
 const RESULTATS_CONFIG = {
   issf10: { label: {{ r_issf10.label | dump | safe }}, date: {{ r_issf10.periode | dump | safe }}, lieu: {{ r_issf10.lieu | dump | safe }}, pdf: {{ r_issf10.pdf | dump | safe }} },
