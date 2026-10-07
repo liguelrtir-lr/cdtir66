@@ -1,6 +1,6 @@
 ---
 title: Ouverture TREBUCHET SHOOTING CLUB
-date: 2027-09-01T00:00:00.000+02:00
+date: 2026-09-01T00:00:00.000+02:00
 couleur: navy-bg
 image: https://trebuchetshootingclub.com/wp-content/uploads/2026/08/indep.jpg
 lien: https://trebuchetshootingclub.com/
