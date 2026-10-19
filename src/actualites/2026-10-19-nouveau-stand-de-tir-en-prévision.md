@@ -1,5 +1,5 @@
 ---
-title: NOUVEAU STAND DE TIR en prévision
+title: NOUVEAU STAND DE TIR en construction à Pollestres
 date: 2026-10-19T15:31:00.000+02:00
 couleur: navy-bg
 image: images/uploads/capture-d’écran-2026-10-19-à-15.30.03.png
